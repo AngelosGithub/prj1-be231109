@@ -8,8 +8,8 @@ import org.apache.ibatis.annotations.Mapper;
 public interface BoardMapper {
 
     @Insert("""
-INSERT INTO board (title, content, writer)
-VALUES (#{title}, #{content}, #{writer})
-""")
+            INSERT INTO board (title, content, writer)
+            VALUES (#{title}, #{content}, #{writer})
+            """)
     int insert(Board board);
 }
