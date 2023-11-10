@@ -35,11 +35,11 @@ public interface BoardMapper {
     int deleteById(Integer id);
 
     @Update("""
-UPDATE board
-SET title = #{title},
-    content = #{content},
-    writer = #{writer}
-WHERE id =#{id}
-""")
-    void update(Board board);
+            UPDATE board
+            SET title = #{title},
+                content = #{content},
+                writer = #{writer}
+            WHERE id = #{id}
+            """)
+    int update(Board board);
 }

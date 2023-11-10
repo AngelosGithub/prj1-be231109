@@ -50,12 +50,11 @@ public class BoardController {
     public ResponseEntity edit(@RequestBody Board board) {
 //        System.out.println("board = " + board);
         if (service.validate(board)) {
-
-        if (service.update(board)) {
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.internalServerError().build();
-        }
+            if (service.update(board)) {
+                return ResponseEntity.ok().build();
+            } else {
+                return ResponseEntity.internalServerError().build();
+            }
         } else {
             return ResponseEntity.badRequest().build();
         }
