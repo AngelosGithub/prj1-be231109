@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 @Mapper
 public interface MemberMapper {
 
@@ -19,4 +21,11 @@ public interface MemberMapper {
             WHERE id = #{id}
             """)
     String selectId(String id);
+
+    @Select("""
+            SELECT id, password, email
+            FROM member
+            ORDER BY id DESC 
+            """)
+    List<Member> selectAll();
 }
