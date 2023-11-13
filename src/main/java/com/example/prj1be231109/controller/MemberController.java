@@ -40,4 +40,9 @@ public class MemberController {
     public List<Member> list() {
         return service.list();
     }
+    
+    @GetMapping("")
+    public void view(String id) {
+        System.out.println("id = " + id);
+    }
 }
