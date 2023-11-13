@@ -51,4 +51,13 @@ public class MemberService {
     public boolean deleteMember(String id) {
         return mapper.deleteById(id) == 1;
     }
+
+    public boolean update(Member member) {
+//        Member oldMember = mapper.selectById(member.getId());
+//        if (member.getPassword().equals()) {
+//
+//        }
+
+        return mapper.update(member) == 1;
+    }
 }
