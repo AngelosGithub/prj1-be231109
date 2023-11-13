@@ -34,6 +34,10 @@ public class MemberService {
             return false;
         }
 
+        if (member.getNickName().isBlank()) {
+            return false;
+        }
+
         if (member.getEmail().isBlank()) {
             return false;
         }
@@ -63,5 +67,9 @@ public class MemberService {
 
     public String getEmail(String email) {
         return mapper.selectEmail(email);
+    }
+
+    public String getNickName(String nickName) {
+        return mapper.selectNickName(nickName);
     }
 }
