@@ -52,4 +52,10 @@ public interface MemberMapper {
             </script>
             """)
     int update(Member member);
+
+    @Select("""
+            SELECT email FROM member
+            WHERE email = #{email}
+            """)
+    String selectEmail(String email);
 }

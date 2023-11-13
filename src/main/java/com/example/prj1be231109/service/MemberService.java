@@ -60,4 +60,8 @@ public class MemberService {
 
         return mapper.update(member) == 1;
     }
+
+    public String getEmail(String email) {
+        return mapper.selectEmail(email);
+    }
 }
