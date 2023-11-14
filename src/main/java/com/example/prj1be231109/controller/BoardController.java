@@ -16,7 +16,11 @@ public class BoardController {
     private final BoardService service;
 
     @PostMapping("add")
-    public ResponseEntity add(@RequestBody Board board) {
+    public ResponseEntity add(@RequestBody Board board,
+                              @SessionAttribute(value = "login", required = false)Member login) {
+        // 1. 세션을 직접 사용 하는 방법
+        // 2. 스프링의 도움을 받는 방법
+        System.out.println("login = " + login);
         if (!service.validate(board)) {
             return ResponseEntity.badRequest().build();
         }
@@ -48,11 +52,7 @@ public class BoardController {
     }
 
     @PutMapping("edit")
-    public ResponseEntity edit(@RequestBody Board board,
-                               @SessionAttribute(value = "login", required = false)Member login) {
-        // 1. 세션을 직접 사용 하는 방법
-        // 2. 스프링의 도움을 받는 방법
-        System.out.println("login = " + login);
+    public ResponseEntity edit(@RequestBody Board board) {
         if (service.validate(board)) {
             if (service.update(board)) {
                 return ResponseEntity.ok().build();
