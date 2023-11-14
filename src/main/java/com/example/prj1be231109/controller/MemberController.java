@@ -3,6 +3,8 @@ package com.example.prj1be231109.controller;
 import com.example.prj1be231109.domain.Member;
 import com.example.prj1be231109.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -86,6 +88,16 @@ public class MemberController {
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @PostMapping("login")
+    public ResponseEntity login(@RequestBody Member member) {
+        System.out.println("member = " + member);
+        if (service.login(member)) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
 }
