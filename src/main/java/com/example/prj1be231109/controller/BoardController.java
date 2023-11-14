@@ -4,6 +4,7 @@ import com.example.prj1be231109.domain.Board;
 import com.example.prj1be231109.domain.Member;
 import com.example.prj1be231109.service.BoardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,12 +21,17 @@ public class BoardController {
                               @SessionAttribute(value = "login", required = false)Member login) {
         // 1. 세션을 직접 사용 하는 방법
         // 2. 스프링의 도움을 받는 방법
-        System.out.println("login = " + login);
+//        System.out.println("login = " + login);
+
+        if (login == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         if (!service.validate(board)) {
             return ResponseEntity.badRequest().build();
         }
 
-        if (service.save(board)) {
+        if (service.save(board, login)) {
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.internalServerError().build();
