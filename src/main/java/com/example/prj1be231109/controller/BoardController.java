@@ -1,6 +1,7 @@
 package com.example.prj1be231109.controller;
 
 import com.example.prj1be231109.domain.Board;
+import com.example.prj1be231109.domain.Member;
 import com.example.prj1be231109.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -47,8 +48,11 @@ public class BoardController {
     }
 
     @PutMapping("edit")
-    public ResponseEntity edit(@RequestBody Board board) {
-//        System.out.println("board = " + board);
+    public ResponseEntity edit(@RequestBody Board board,
+                               @SessionAttribute(value = "login", required = false)Member login) {
+        // 1. 세션을 직접 사용 하는 방법
+        // 2. 스프링의 도움을 받는 방법
+        System.out.println("login = " + login);
         if (service.validate(board)) {
             if (service.update(board)) {
                 return ResponseEntity.ok().build();
