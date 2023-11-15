@@ -39,4 +39,11 @@ public class CommentController {
     public List<Comment> list(@RequestParam("id") Integer boardId) {
         return service.list(boardId);
     }
+
+    @DeleteMapping("{id}")
+    public void remove(@PathVariable Integer id) {
+
+        service.remove(id);
+    }
+
 }
