@@ -1,6 +1,7 @@
 package com.example.prj1be231109.service;
 
 import com.example.prj1be231109.domain.Like;
+import com.example.prj1be231109.domain.Member;
 import com.example.prj1be231109.mapper.LikeMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -8,9 +9,13 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class LikeService {
+
     private final LikeMapper mapper;
 
-    public void update(Like like) {
+    public void update(Like like, Member login) {
+
+        like.setMemberId(login.getId());
+
         // 처음 좋아요를 누를때 > insert
         // 다시 누르면 > delete
         int count = 0;
