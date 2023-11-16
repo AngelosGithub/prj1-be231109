@@ -81,6 +81,7 @@ public class MemberController {
 
     @DeleteMapping
     public ResponseEntity delete(String id,
+                                 HttpSession session,
                                  @SessionAttribute(value = "login", required = false) Member login) {
         // todo : 로그인 했는지? -> 안했으면 401
         // todo : 자기 정보인지? -> 아니면 403
@@ -93,10 +94,11 @@ public class MemberController {
         }
 
         if (service.deleteMember(id)) {
+            session.invalidate();
             return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.internalServerError().build();
         }
-
-        return ResponseEntity.internalServerError().build();
     }
 
     @PutMapping("edit")
